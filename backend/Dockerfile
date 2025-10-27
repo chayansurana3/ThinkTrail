@@ -27,7 +27,7 @@ FROM azul/zulu-openjdk:21-jre
 WORKDIR /app
 
 # Copy built JAR from the builder stage
-COPY --from=builder /app/build/libs/*.jar app.jar
+COPY --from=builder /app/build/libs/app.jar app.jar
 
 # Expose port (default Spring Boot port)
 EXPOSE 8080
