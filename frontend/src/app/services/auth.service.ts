@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import { environmentPRD } from '../environments/environment.prod';
 import { AuthResponse } from '../responses/authResponse.model';
 import { StateService } from './state.service';
 
@@ -11,7 +12,8 @@ import { StateService } from './state.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = environment.authApiUrl;
+  // private apiUrl = environment.authApiUrl;
+  private apiUrl = environmentPRD.baseApiUrl + "/auth";
 
   constructor(
     private http: HttpClient,

@@ -8,12 +8,13 @@ import { tap, catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
-
+import { environmentPRD } from '../environments/environment.prod';
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = environment.usersApiUrl;
+  // private apiUrl = environment.usersApiUrl;
+  private apiUrl = environmentPRD.baseApiUrl + "/users";
 
   constructor(
     private http: HttpClient,

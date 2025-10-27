@@ -4,10 +4,11 @@ import { environment } from '../environments/environment';
 import { tap, catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { StateService } from './state.service';
-
+import { environmentPRD } from '../environments/environment.prod';
 @Injectable({ providedIn: 'root' })
 export class LikeService {
-  private apiUrl = environment.likesApiUrl;
+  // private apiUrl = environment.likesApiUrl;
+  private apiUrl = environmentPRD.baseApiUrl + "/likes";
 
   constructor(private http: HttpClient, private state: StateService) {}
 

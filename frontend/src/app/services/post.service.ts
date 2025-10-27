@@ -8,11 +8,12 @@ import { PostsResponse } from '../responses/postsResponse.model';
 import { createPostRequest } from '../requests/createPostRequest.model';
 import { createPostResponse } from '../responses/createPostResponse.model';
 import { Post } from '../models/post.model';
-
+import { environmentPRD } from '../environments/environment.prod';
 @Injectable({ providedIn: 'root' })
 export class PostService {
-  private apiUrl = environment.postsApiUrl;
-
+  // private apiUrl = environment.postsApiUrl;
+  private apiUrl = environmentPRD.baseApiUrl + "/posts";
+  
   constructor(private http: HttpClient, private state: StateService) {}
 
   getAllPosts() {
