@@ -1,0 +1,83 @@
+<div
+  class="max-w-4xl mx-auto mt-8 p-6 bg-white dark:bg-gray-800 rounded shadow border-t border-gray-200 dark:border-gray-700 pt-6"
+>
+  <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-6">
+    Comments
+  </h2>
+
+  <!-- Add Comment Form -->
+  <div class="flex items-start mb-6 space-x-3">
+    <!-- Current user avatar -->
+    <img
+      [src]="userAvatarUrl()"
+      alt="Your Avatar"
+      class="w-10 h-10 rounded-full border-2 border-teal-500 object-cover shadow-sm"
+    />
+
+    <div class="flex-1 flex space-x-2">
+      <input
+        [(ngModel)]="newComment"
+        placeholder="Write a comment..."
+        class="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-teal-400 focus:outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+      />
+      <button
+        (click)="addComment()"
+        class="bg-teal-500 hover:bg-teal-600 transition text-white px-5 py-2 rounded-lg shadow-md cursor-pointer"
+      >
+        Post
+      </button>
+    </div>
+  </div>
+
+  <!-- Comments List -->
+  <div *ngFor="let c of comments" class="mb-4 relative">
+    <div
+      class="flex items-start space-x-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl shadow-sm transition transform hover:-translate-y-1 hover:shadow-md"
+    >
+      <!-- Author avatar -->
+      <img
+        [src]="getCommentAvatar(c)"
+        alt="{{ c.authorName }} Avatar"
+        class="w-10 h-10 rounded-full border-2 border-teal-500 object-cover"
+      />
+
+      <div class="flex-1">
+        <!-- Name + timestamp -->
+        <div class="flex items-center justify-between">
+          <a
+            routerLink="/profile/{{ c.userId }}"
+            class="font-semibold text-gray-900 dark:text-gray-100 hover:underline"
+            >{{ c.authorName }}</a
+          >
+          <span class="text-gray-400 dark:text-gray-300 text-sm">
+            {{ c.createdAt | date: 'MMM d, y' }}
+          </span>
+        </div>
+
+        <!-- Comment content -->
+        <p class="text-gray-800 dark:text-gray-100 mt-1 leading-relaxed whitespace-pre-wrap">
+          {{ c.content }}
+        </p>
+
+        <!-- Delete button if own comment -->
+        <div class="mt-2">
+          <button
+            *ngIf="c.userId === userId"
+            (click)="deleteComment(c.id)"
+            class="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 text-sm font-medium cursor-pointer"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No comments yet -->
+  <div
+    *ngIf="comments.length === 0"
+    class="text-gray-400 dark:text-gray-500 text-center mt-6"
+  >
+    No comments yet. Be the first to comment!
+  </div>
+</div>

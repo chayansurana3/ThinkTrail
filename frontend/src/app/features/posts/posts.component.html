@@ -1,0 +1,41 @@
+<section class="max-w-7xl mx-auto px-4 py-8">
+  <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-gray-100 underline">
+    Latest Blogs
+  </h2>
+
+  @if (posts$ | async; as posts) {
+    @if (posts.length > 0) {
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        @for (post of posts; track post.id) {
+          <div (click)="navigateToPost(post.id)" 
+            class="block rounded overflow-hidden shadow hover:shadow-lg transition bg-white dark:bg-gray-800 cursor-pointer"
+          >
+            <img
+              [src]="post.imageUrl || 'assets/default-image.png'"
+              [alt]="post.title"
+              (error)="onImageError($event)"
+              class="w-full h-52 object-cover"
+            />
+            <div class="p-4">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">{{ post.title }}</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                {{ post.authorName }} • {{ post.createdAt | date:'MMMM d, y' }}
+              </p>
+              <p class="text-gray-700 dark:text-gray-300">{{ post.summary }} ...... <span class="font-bold">Read more</span></p>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="text-center mt-24 text-gray-500 dark:text-gray-400">
+        <p class="text-lg">No posts available.</p>
+        <p class="text-sm mt-2">Check back later for new content!</p>
+      </div>
+    }
+  } @else {
+    <div class="text-center mt-24">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 dark:border-gray-100 mx-auto"></div>
+      <p class="text-gray-500 dark:text-gray-400 mt-4">Loading posts...</p>
+    </div>
+  }
+</section>

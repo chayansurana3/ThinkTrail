@@ -1,0 +1,66 @@
+<section class="max-w-3xl mx-auto p-6 mt-16 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-800">
+  <h2 class="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-100 text-center">📝 Create New Blog Post</h2>
+
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
+      <input
+        type="text"
+        formControlName="title"
+        placeholder="Enter post title"
+        class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-700 p-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-teal-500 focus:border-teal-500"
+      />
+      <div *ngIf="postForm.get('title')?.touched && postForm.get('title')?.invalid" class="text-red-500 text-sm">
+        Title is required and should be at least 5 characters.
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Image URL</label>
+      <input
+        type="text"
+        formControlName="imageUrl"
+        placeholder="Enter image URL"
+        class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-700 p-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-teal-500 focus:border-teal-500"
+      />
+      <div *ngIf="postForm.get('imageUrl')?.touched && postForm.get('imageUrl')?.errors?.['invalidUrl']" class="text-red-500 text-sm">
+        Please enter a valid image URL.
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Summary</label>
+      <textarea
+        formControlName="summary"
+        rows="2"
+        placeholder="Short summary of the post"
+        class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-700 p-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-teal-500 focus:border-teal-500"
+      ></textarea>
+      <div *ngIf="postForm.get('summary')?.touched && postForm.get('summary')?.invalid" class="text-red-500 text-sm">
+        Summary is required and should be under 500 characters.
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Content</label>
+      <textarea
+        formControlName="content"
+        rows="6"
+        placeholder="Write your blog content here..."
+        class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-700 p-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-teal-500 focus:border-teal-500"
+      ></textarea>
+      <div *ngIf="postForm.get('content')?.touched && postForm.get('content')?.invalid" class="text-red-500 text-sm">
+        Content must be at least 300 characters.
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button
+        type="submit"
+        class="cursor-pointer px-6 py-2 bg-teal-600 dark:bg-teal-500 text-white font-semibold rounded-lg hover:bg-teal-700 dark:hover:bg-teal-400 transition shadow hover:shadow-2xl"
+      >
+        Publish
+      </button>
+    </div>
+  </form>
+</section>

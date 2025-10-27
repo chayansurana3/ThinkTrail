@@ -1,0 +1,29 @@
+<div class="max-w-6xl mx-auto mt-8">
+  <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-gray-100 underline">
+    Your Blogs
+  </h2>
+  @if (posts$ | async; as posts) {
+    @if (posts.length > 0) {
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          *ngFor="let post of posts"
+          class="cursor-pointer block rounded overflow-hidden shadow bg-white dark:bg-gray-800 hover:shadow-lg transition"
+          (click)="navigateToPost(post.id)"
+        >
+          <img [src]="post.imageUrl" class="w-full h-48 object-cover" />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">{{ post.title }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+              {{ post.authorName }} • {{ post.createdAt | date:'MMMM d, y' }}
+            </p>
+            <p class="text-gray-700 dark:text-gray-300">{{ post.summary }} ...... <span class="font-bold">Read more</span></p>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <div class="text-center mt-24 text-gray-500 dark:text-gray-400">
+        You haven’t written any posts yet.
+      </div>
+    }
+  }
+</div>

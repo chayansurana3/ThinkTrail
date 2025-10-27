@@ -1,0 +1,62 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-600 to-purple-800 p-5">
+  <div class="bg-white rounded-3xl p-16 text-center max-w-lg w-full shadow-2xl relative overflow-hidden">
+    
+    <!-- Decorative gradient line at top -->
+    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-400 via-teal-400 to-blue-400"></div>
+    
+    <!-- Error Icon/Animation -->
+    <div class="flex justify-center mb-8">
+      <svg viewBox="0 0 100 100" width="120" height="120" class="drop-shadow-lg">
+        <circle cx="50" cy="50" r="45" stroke="#ef4444" stroke-width="3" fill="none" 
+                stroke-dasharray="283" stroke-dashoffset="283" class="animate-pulse">
+        </circle>
+        <path d="M30 30 L70 70 M70 30 L30 70" stroke="#ef4444" stroke-width="3" 
+              stroke-linecap="round" class="animate-bounce"></path>
+      </svg>
+    </div>
+
+    <!-- Error Code -->
+    <h1 class="text-6xl font-black mb-5 bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">
+      {{ errorCode }}
+    </h1>
+    
+    <!-- Error Message -->
+    <h2 class="text-3xl font-semibold text-gray-800 mb-5">
+      {{ errorMessage }}
+    </h2>
+    
+    <!-- Error Details (if any) -->
+    @if (errorDetails) {
+      <p class="text-gray-600 text-base leading-relaxed mb-10 max-w-md mx-auto">
+        {{ errorDetails }}
+      </p>
+    } @else {
+      <p class="text-gray-600 text-base leading-relaxed mb-10 max-w-md mx-auto">
+        We're sorry, but something unexpected happened. 
+        Please try again or contact support if the problem persists.
+      </p>
+    }
+
+    <!-- Action Buttons -->
+    <div class="flex flex-col gap-3 mb-8">
+      <button 
+        class="inline-flex items-center justify-center gap-2 px-7 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 hover:from-blue-600 hover:to-purple-700" 
+        (click)="goHome()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9,22 9,12 15,12 15,22"></polyline>
+        </svg>
+        Go Home
+      </button>
+
+    <!-- Support Link -->
+    <div class="pt-5 border-t border-gray-200">
+      <p class="text-gray-500 text-sm">
+        Still having trouble? 
+        <a href="mailto:support@yourapp.com" class="text-blue-500 font-semibold hover:text-blue-600 hover:underline transition-colors">
+          Contact Support
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
