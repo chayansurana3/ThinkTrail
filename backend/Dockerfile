@@ -1,8 +1,7 @@
 # =========================================
 # Stage 1 — Build Stage (Gradle Build)
 # =========================================
-FROM azul/zulu-openjdk:21 AS builder
-
+FROM eclipse-temurin:21-jre AS builder
 WORKDIR /app
 
 # Copy Gradle files first (for better caching)
