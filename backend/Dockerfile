@@ -1,7 +1,7 @@
 # =========================================
 # Stage 1 — Build Stage (Gradle Build)
 # =========================================
-FROM eclipse-temurin:21-jre AS builder
+FROM eclipse-temurin:21-jdk AS builder
 WORKDIR /app
 
 # Copy Gradle files first (for better caching)
@@ -21,7 +21,7 @@ RUN ./gradlew clean build -x test --no-daemon
 # =========================================
 # Stage 2 — Runtime Stage (Slim JDK)
 # =========================================
-FROM azul/zulu-openjdk:21-jre
+FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
