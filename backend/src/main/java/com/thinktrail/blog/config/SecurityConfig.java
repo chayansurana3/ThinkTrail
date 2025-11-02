@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**", "api/posts/**", "api/users/**", "api/likes/**", "api/comments/**").permitAll()
+                        .requestMatchers("/api/auth/**", "/api/posts/**", "/api/users/**", "/api/likes/**", "/api/comments/**").permitAll()
                         .requestMatchers("/oauth2/**", "/login/**", "/posts/**").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .anyRequest().authenticated()
@@ -69,7 +69,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration cfg = new CorsConfiguration();
-        cfg.setAllowedOrigins(List.of("http://localhost:4200")); // Angular dev server
+        cfg.setAllowedOrigins(List.of("*"));
         cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         cfg.setAllowedHeaders(List.of("*"));
         cfg.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
