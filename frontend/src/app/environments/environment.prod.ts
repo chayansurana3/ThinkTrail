@@ -1,6 +1,6 @@
 export const environmentPRD = {
   production: true,
-  baseApiUrl: 'http://api',
+  baseApiUrl: 'http://https://thinktrail-288291511247.us-central1.run.app/api',
 };
 
 export const googleClientConfig = {
