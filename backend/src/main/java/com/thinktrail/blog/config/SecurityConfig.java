@@ -72,7 +72,6 @@ public class SecurityConfig {
         cfg.setAllowedOrigins(List.of("https://thinktrail-288291511247.us-central1.run.app", "https://thinktrail-rcyofvoeua-uc.a.run.app"));
         cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         cfg.setAllowedHeaders(List.of("*"));
-        cfg.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
         cfg.setAllowCredentials(true);
         cfg.setExposedHeaders(List.of("Authorization"));
 
