@@ -1,6 +1,6 @@
 export const environmentPRD = {
   production: true,
-  baseApiUrl: 'http://localhost:8080/api',
+  baseApiUrl: 'http://api',
 };
 
 export const googleClientConfig = {
