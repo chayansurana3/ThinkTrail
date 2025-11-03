@@ -53,8 +53,8 @@ export default {
 ],
   entryPointToBrowserMapping: undefined,
   assets: {
-    'index.csr.html': {size: 9260, hash: '26e23751b639a5fbdf932c8f789cca2bc6a62fdf8cebb66890eb01e394f03a0d', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
-    'index.server.html': {size: 1090, hash: 'a5bdea6507af112798318703e1fd40012034d47d83743b912ac802f1127746a0', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
+    'index.csr.html': {size: 9260, hash: 'c754f72235a6a5ffc5617470edb7f9e6ad9a17cf5f4b1209e7a88bcdd0f6fcf7', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
+    'index.server.html': {size: 1090, hash: '2278270b4fa152b34b529a41123501e990a7f0b6a6e2f292303b5ee34ac4525f', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
     'styles-GZOK2SWH.css': {size: 37585, hash: 'NBWbNWvhrJc', text: () => import('./assets-chunks/styles-GZOK2SWH_css.mjs').then(m => m.default)}
   },
 };
