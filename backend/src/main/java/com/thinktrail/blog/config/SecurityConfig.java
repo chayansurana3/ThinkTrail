@@ -51,13 +51,19 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/",
                                 "/index.html",
-                                "/static/**",
                                 "/favicon.ico",
                                 "/manifest.json",
+                                "/*.js",
+                                "/*.css",
+                                "/*.ico",
+                                "/*.png",
+                                "/*.jpg",
+                                "/*.svg",
+                                "/*.woff",
+                                "/*.woff2",
+                                "/*.ttf",
                                 "/assets/**",
-                                "/images/**",
-                                "/css/**",
-                                "/js/**"
+                                "/assets-chunks/**"
                         ).permitAll()
                         .requestMatchers("/actuator/health").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()

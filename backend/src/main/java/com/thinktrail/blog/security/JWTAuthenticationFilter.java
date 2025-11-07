@@ -25,8 +25,28 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
             throws ServletException, IOException {
-
-        if (req.getServletPath().equals("/api/auth/signup") || req.getServletPath().equals("/api/auth/login")) {
+        String path = req.getServletPath();
+        if (path.equals("/") ||
+                path.equals("/index.html") ||
+                path.startsWith("/api/auth/") ||
+                path.startsWith("/actuator/health") ||
+                path.startsWith("/static/") ||
+                path.startsWith("/assets/") ||
+                path.startsWith("/images/") ||
+                path.startsWith("/css/") ||
+                path.startsWith("/js/") ||
+                path.endsWith(".js") ||
+                path.endsWith(".css") ||
+                path.endsWith(".html") ||
+                path.endsWith(".ico") ||
+                path.endsWith(".png") ||
+                path.endsWith(".jpg") ||
+                path.endsWith(".svg") ||
+                path.endsWith(".woff") ||
+                path.endsWith(".woff2") ||
+                path.endsWith(".ttf") ||
+                path.equals("/favicon.ico") ||
+                path.equals("/manifest.json")) {
             chain.doFilter(req, res);
             return;
         }
