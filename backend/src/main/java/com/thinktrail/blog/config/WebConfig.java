@@ -17,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // Serve static resources from the browser folder
         registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static.dist.thinktrail/browser/")
+                .addResourceLocations("classpath:/static/dist/thinktrail/browser/")
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver() {
                     @Override
@@ -31,7 +31,7 @@ public class WebConfig implements WebMvcConfigurer {
 
                         // For Angular routes (non-API, non-file routes), serve index.html
                         if (!resourcePath.startsWith("api/")) {
-                            return new ClassPathResource("/static.dist.thinktrail/browser/index.csr.html");
+                            return new ClassPathResource("/static/dist/thinktrail/browser/index.csr.html");
                         }
 
                         return null;
@@ -42,6 +42,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         // Forward root to index.html
-        registry.addViewController("/").setViewName("forward:/index.html");
+        registry.addViewController("/").setViewName("forward:/index.csr.html");
     }
 }
