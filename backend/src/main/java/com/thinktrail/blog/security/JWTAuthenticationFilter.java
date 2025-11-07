@@ -28,6 +28,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         String path = req.getServletPath();
         if (path.equals("/") ||
                 path.equals("/index.html") ||
+                path.equals("/index.csr.html") ||
                 path.startsWith("/api/auth/") ||
                 path.startsWith("/actuator/health") ||
                 path.startsWith("/static/") ||
