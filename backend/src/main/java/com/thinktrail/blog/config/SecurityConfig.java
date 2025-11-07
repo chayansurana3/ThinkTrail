@@ -93,7 +93,7 @@ public class SecurityConfig {
         cfg.setAllowedOrigins(List.of("https://thinktrail-288291511247.us-central1.run.app", "https://thinktrail-rcyofvoeua-uc.a.run.app"));
         cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         cfg.setAllowedHeaders(List.of("*"));
-        cfg.setAllowCredentials(true);
+        cfg.setAllowCredentials(false);
         cfg.setExposedHeaders(List.of("Authorization"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
