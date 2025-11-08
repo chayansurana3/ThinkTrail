@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule, NgIf, NgForOf } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { PostService } from '../../services/post.service';
 import { LikeService } from '../../services/like.service';
 import { StateService } from '../../services/state.service';
@@ -24,6 +25,7 @@ export class PostComponent implements OnInit, OnDestroy {
   post: PostWithAuthor | null = null;
   author: User | null = null; // duplicate reference for convenience
   userId: number | null = null;
+  safeContent: SafeHtml | null = null;
 
   liked = false;
   likesCount = 0;
@@ -49,7 +51,8 @@ export class PostComponent implements OnInit, OnDestroy {
     private likeService: LikeService,
     private state: StateService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -86,6 +89,7 @@ export class PostComponent implements OnInit, OnDestroy {
         next: (post) => {
           // attach post (immutable fields come from Post interface)
           this.post = post as PostWithAuthor;
+          this.safeContent = this.sanitizer.bypassSecurityTrustHtml(post.content || '');
           this.likesCount = post.likes ?? 0;
 
           // fetch author using authorId

@@ -137,11 +137,10 @@
     </div>
 
     <!-- Post Content -->
-    <p
-      class="text-lg text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-wrap break-words"
-    >
-      {{ post.content }}
-    </p>
+    <div
+      class="prose dark:prose-invert max-w-none text-lg leading-relaxed"
+      [innerHTML]="safeContent"
+    ></div>
 
     <!-- Comments -->
     <app-comments *ngIf="post" [postId]="post.id"></app-comments>
