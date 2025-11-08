@@ -12,22 +12,42 @@ import { PostService } from '../../services/post.service';
 import { StateService } from '../../services/state.service';
 import { createPostRequest } from '../../requests/createPostRequest.model';
 import { Router } from '@angular/router';
-
+import { QuillModule } from 'ngx-quill';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 @Component({
   standalone: true,
   selector: 'app-write',
   templateUrl: './write.component.html',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, QuillModule],
 })
 export class WriteComponent {
   postForm: FormGroup;
   private userId: number | null = null;
+  quillModules = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+      ['blockquote', 'code-block'],
+      [{ header: 1 }, { header: 2 }], // custom button values
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ script: 'sub' }, { script: 'super' }],
+      [{ indent: '-1' }, { indent: '+1' }],
+      [{ direction: 'rtl' }], // text direction
+      [{ size: ['small', false, 'large', 'huge'] }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ color: [] }, { background: [] }],
+      [{ font: [] }],
+      [{ align: [] }],
+      ['clean'], // remove formatting
+      ['link', 'image', 'video'], // media embeds
+    ],
+  };
 
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
     private state: StateService,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {
     this.postForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
@@ -39,6 +59,11 @@ export class WriteComponent {
     this.state.currentUser$.subscribe((user) => {
       this.userId = user ? user.id : null;
     });
+  }
+
+  getSafeHtml(): SafeHtml {
+    const content = this.postForm.get('content')?.value || '';
+    return this.sanitizer.bypassSecurityTrustHtml(content);
   }
 
   onSubmit() {
@@ -78,27 +103,21 @@ export class WriteComponent {
   private showValidationErrors(): void {
     const controls = this.postForm.controls;
 
-    if (controls['title'].hasError('required'))
-      alert('❌ Title is required');
+    if (controls['title'].hasError('required')) alert('❌ Title is required');
     else if (controls['title'].hasError('minlength'))
       alert('❌ Title must be at least 5 characters long');
-
     else if (controls['summary'].hasError('required'))
       alert('❌ Summary is required');
     else if (controls['summary'].hasError('maxlength'))
       alert('❌ Summary cannot exceed 500 characters');
-
     else if (controls['imageUrl'].hasError('invalidUrl'))
       alert('❌ Invalid Image URL format');
-
     else if (controls['content'].hasError('required'))
       alert('❌ Content is required');
     else if (controls['content'].hasError('minlength'))
       alert('❌ Content must be at least 300 characters long');
-    else if (this.userId === null)
-      alert('⚠️ User not logged in');
-    else
-      alert('⚠️ Invalid form, please review inputs');
+    else if (this.userId === null) alert('⚠️ User not logged in');
+    else alert('⚠️ Invalid form, please review inputs');
   }
 
   urlValidator(control: AbstractControl): ValidationErrors | null {
