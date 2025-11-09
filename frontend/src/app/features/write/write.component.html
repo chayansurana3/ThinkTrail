@@ -76,6 +76,8 @@
       ></textarea> -->
       <quill-editor
         formControlName="content"
+        [modules]="quillModules"
+        theme="snow"
         class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-md border border-gray-300 dark:border-gray-700 p-2"
         style="height: 300px"
       ></quill-editor>
