@@ -62,7 +62,8 @@ export class WriteComponent {
   }
 
   getSafeHtml(): SafeHtml {
-    const content = this.postForm.get('content')?.value || '';
+    let content = this.postForm.get('content')?.value || '';
+    content = content.replace(/<(p|div)>\s*(<br\s*\/?>)?\s*<\/\1>/gi, '<$1 class="ql-blank-line">&nbsp;</$1>');
     return this.sanitizer.bypassSecurityTrustHtml(content);
   }
 
