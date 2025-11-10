@@ -27,7 +27,7 @@ public class Post {
     @Column(nullable = false, columnDefinition = "BIGINT DEFAULT 0")
     private long shares;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255, unique = true)
     private String title;
 
     @Column(columnDefinition = "TEXT", nullable = false)
